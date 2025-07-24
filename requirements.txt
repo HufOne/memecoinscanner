@@ -1,7 +1,0 @@
-
-streamlit
-requests
-pandas
-textblob
-wordcloud
-matplotlib
