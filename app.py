@@ -36,7 +36,7 @@ st.write("Analyse des tweets crypto pour déduire une position **LONG/SHORT**")
 # MAIS PENSE À LES RETIRER AVANT DE POUSSER SUR UN DÉPÔT PUBLIC !
 
 # Si tu utilises st.secrets (recommandé pour Streamlit Cloud) :
-    BEARER_TOKEN = os.getenv("TWITTER_BEARER_TOKEN")
+BEARER_TOKEN = os.getenv("TWITTER_BEARER_TOKEN")
 
 if BEARER_TOKEN is None:
     st.error("La clé Bearer Token Twitter n'est pas configurée dans les secrets de Codespaces.")
