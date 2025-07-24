@@ -40,8 +40,9 @@ try:
     
 BEARER_TOKEN = os.getenv("TWITTER_BEARER_TOKEN")
 
-if not BEARER_TOKEN:
+if BEARER_TOKEN is None:
     st.error("La clé Bearer Token Twitter n'est pas configurée dans les secrets de Codespaces.")
+    st.info("Assurez-vous qu'elle est définie comme un secret dans les paramètres de votre Codespace GitHub.")
     st.stop()
 except KeyError:
     st.error("Les clés API Twitter ne sont pas configurées dans `secrets.toml` ou variables d'environnement.")
