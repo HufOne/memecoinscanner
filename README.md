@@ -1,22 +1,33 @@
-# Sentiment Scanner
+# 🧠 MemeCoin Sentiment Scanner
 
-Application Streamlit d'analyse de sentiment pour les crypto-monnaies à partir de tweets Twitter/X via `snscrape`.
+Analyse automatique de sentiment autour des cryptos (notamment **meme coins**) à partir de **tweets Twitter/X**.
 
-## Utilisation
+> Basé sur `snscrape` et `TextBlob` pour contourner les limitations de l'API Twitter.
 
-1. Entrez un nom ou ticker de crypto-monnaie (ex: `$DOGE`, `$PEPE`).
-2. Cliquez sur "Analyser".
-3. Obtenez une position recommandée : LONG, SHORT ou NEUTRE.
+---
 
-## Déploiement
+## 🚀 Fonctionnalités
 
-### Local
+- 🔍 Recherche de tweets récents contenant un symbole crypto (ex: `$PEPE`, `$DOGE`, `$PENGU`)
+- 💬 Analyse de **sentiment** : positif, neutre ou négatif
+- 📊 Recommandation de **position trading** : LONG, SHORT ou NEUTRE
+- 100% open-source et hébergeable gratuitement
+
+---
+
+## 📦 Technologies
+
+- `Streamlit` – Interface web ultra légère
+- `snscrape` – Récupération de tweets sans clé API
+- `TextBlob` – Analyse de sentiment
+- `nltk` – Tokenisation linguistique
+
+---
+
+## 🛠️ Installation locale
+
 ```bash
+git clone https://github.com/<ton-user>/memecoinscanner.git
+cd memecoinscanner
 pip install -r requirements.txt
 streamlit run app.py
-```
-
-### GitHub + Streamlit Cloud
-1. Poussez ce dossier sur GitHub.
-2. Allez sur [https://streamlit.io/cloud](https://streamlit.io/cloud)
-3. Connectez votre repo GitHub et sélectionnez `app.py` comme script principal.
