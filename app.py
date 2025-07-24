@@ -4,12 +4,9 @@ from textblob import TextBlob
 import nltk
 import os # Ajouté pour potentiellement lire les variables d'environnement si tu ne passes pas par st.secrets
 
-# Téléchargement de 'punkt' pour NLTK
-# Le bloc try-except permet d'éviter de télécharger plusieurs fois
-try:
-    nltk.data.find('tokenizers/punkt')
-except nltk.downloader.DownloadError:
-    nltk.download('punkt')
+# NLTK download (géré via packages.txt pour StreamlitCloud)
+# ou juste un appel direct si tu es sûr qu'il est toujours là après déploiement
+# nltk.download('punkt') # Garde cette ligne si tu veux une installation "au cas ou"
 
 st.set_page_config(page_title="Sentiment Scanner", layout="centered")
 
