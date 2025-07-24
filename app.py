@@ -40,7 +40,7 @@ try:
   import os # Assure-toi que 'os' est bien importé en haut du fichier
 
 ... (le reste de ton code)
-Accède au secret via les variables d'environnement de Codespaces
+#Accède au secret via les variables d'environnement de Codespaces
 BEARER_TOKEN = os.getenv("TWITTER_BEARER_TOKEN")
 
 if not BEARER_TOKEN:
