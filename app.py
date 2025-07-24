@@ -5,7 +5,7 @@ import nltk
 import os # Ajouté pour potentiellement lire les variables d'environnement si tu ne passes pas par st.secrets
 
 #--- Gestion du téléchargement NLTK ---
-Répertoire où NLTK va chercher/stocker ses données
+# Répertoire où NLTK va chercher/stocker ses données
 nltk_data_dir = os.path.join(os.path.abspath(os.path.dirname(file)), 'nltk_data')
 
 # Si le répertoire n'existe pas, crée-le
