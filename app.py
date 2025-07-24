@@ -25,7 +25,7 @@ def get_tweets(query, limit=50):
 
 def get_sentiment(text):
     analysis = TextBlob(text)
-    return analysis.sentiment.polarity  # entre -1 et 1
+    return analysis.sentiment.polarity
 
 if st.button("Analyser"):
     if query.strip() == "":
@@ -37,7 +37,7 @@ if st.button("Analyser"):
         else:
             sentiments = [get_sentiment(t) for t in tweets]
             avg_sentiment = sum(sentiments) / len(sentiments)
-
+            
             st.write(f"Nombre de tweets analysés : {len(tweets)}")
             st.write(f"Sentiment moyen : `{avg_sentiment:.3f}`")
 
