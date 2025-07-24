@@ -2,6 +2,12 @@ import streamlit as st
 import snscrape.modules.twitter as sntwitter
 from textblob import TextBlob
 import nltk
+from snscrape.base import Scraper
+
+# Ajout d'un User-Agent pour éviter le blocage par Twitter
+Scraper._headers.update({
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+})
 
 nltk.download('punkt')
 
@@ -37,7 +43,7 @@ if st.button("Analyser"):
         else:
             sentiments = [get_sentiment(t) for t in tweets]
             avg_sentiment = sum(sentiments) / len(sentiments)
-            
+
             st.write(f"Nombre de tweets analysés : {len(tweets)}")
             st.write(f"Sentiment moyen : `{avg_sentiment:.3f}`")
 
