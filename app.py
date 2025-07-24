@@ -6,7 +6,7 @@ import os # Ajouté pour potentiellement lire les variables d'environnement si t
 
 #--- Gestion du téléchargement NLTK ---
 # Répertoire où NLTK va chercher/stocker ses données
-nltk_data_dir = os.path.join(os.path.abspath(os.path.dirname(file)), 'nltk_data')
+nltk_data_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)) , 'nltk_data')
 
 # Si le répertoire n'existe pas, crée-le
 if not os.path.exists(nltk_data_dir):
