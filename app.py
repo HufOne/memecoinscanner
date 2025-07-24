@@ -29,30 +29,35 @@ st.set_page_config(page_title="Sentiment Scanner", layout="centered")
 st.title("🧠 Sentiment Scanner")
 st.write("Analyse des tweets crypto pour déduire une position **LONG/SHORT**")
 
-# --- Configuration de l'API Twitter ---
-# Pour la sécurité, il est FORTEMENT recommandé d'utiliser st.secrets
-# si tu déploies sur Streamlit Cloud, ou des variables d'environnement.
-# Pour le développement local, tu peux les mettre directement ici pour tester,
-# MAIS PENSE À LES RETIRER AVANT DE POUSSER SUR UN DÉPÔT PUBLIC !
+# ... (ton code NLTK et Streamlit set_page_config, titre, etc. ici, inchangé)
 
-# Si tu utilises st.secrets (recommandé pour Streamlit Cloud) :
+st.set_page_config(page_title="Sentiment Scanner", layout="centered")
+
+st.title("🧠 Sentiment Scanner")
+st.write("Analyse des tweets crypto pour déduire une position **LONG/SHORT**")
+
+# --- Configuration de l'API Twitter pour Codespaces ---
+# Récupère le Bearer Token depuis les variables d'environnement du Codespace
+# C'est la méthode recommandée pour les secrets dans Codespaces.
 BEARER_TOKEN = os.getenv("TWITTER_BEARER_TOKEN")
 
+# Vérifie si la clé est présente. Si elle ne l'est pas, arrête l'application.
 if BEARER_TOKEN is None:
-    st.error("La clé Bearer Token Twitter n'est pas configurée dans les secrets de Codespaces.")
-    st.info("Assurez-vous qu'elle est définie comme un secret dans les paramètres de votre Codespace GitHub.")
-    st.stop()
-except KeyError:
-    st.error("Les clés API Twitter ne sont pas configurées dans `secrets.toml` ou variables d'environnement.")
-    st.stop() # Arrête l'exécution si les clés ne sont pas trouvées
+    st.error("ERREUR : La clé Bearer Token Twitter (TWITTER_BEARER_TOKEN) n'est pas configurée.")
+    st.info("Veuillez la définir comme un secret dans les paramètres de votre Codespace GitHub.")
+    st.stop() # Arrête l'exécution de l'application Streamlit
 
-# Si tu n'utilises PAS st.secrets, et que tu veux lire depuis les variables d'environnement (pour un déploiement non-Streamlit Cloud par exemple)
-# BEARER_TOKEN = os.getenv("TWITTER_BEARER_TOKEN")
-# if not BEARER_TOKEN:
-#     st.error("La variable d'environnement TWITTER_BEARER_TOKEN n'est pas définie.")
-#     st.stop()
+# Initialise le client Tweepy avec le Bearer Token
+try:
+    client = tweepy.Client(BEARER_TOKEN)
+    # Un petit test pour s'assurer que le client fonctionne (optionnel mais utile)
+    # client.get_me() 
+except Exception as e:
+    st.error(f"ERREUR : Impossible d'initialiser l'API Twitter. Vérifiez votre clé ou votre connexion.")
+    st.error(f"Détails de l'erreur : {e}")
+    st.stop() # Arrête l'application si le client ne peut pas être créé
 
-
+# ... (le reste de ton code d'application : query_input, fonctions, bouton Analyser, etc.)
 # Initialisation du client Tweepy pour l'API v2
 try:
     client = tweepy.Client(BEARER_TOKEN)
