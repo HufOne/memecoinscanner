@@ -4,9 +4,25 @@ from textblob import TextBlob
 import nltk
 import os # Ajouté pour potentiellement lire les variables d'environnement si tu ne passes pas par st.secrets
 
-# NLTK download (géré via packages.txt pour StreamlitCloud)
-# ou juste un appel direct si tu es sûr qu'il est toujours là après déploiement
-# nltk.download('punkt') # Garde cette ligne si tu veux une installation "au cas ou"
+--- Gestion du téléchargement NLTK ---
+Répertoire où NLTK va chercher/stocker ses données
+nltk_data_dir = os.path.join(os.path.abspath(os.path.dirname(file)), 'nltk_data')
+
+Si le répertoire n'existe pas, crée-le
+if not os.path.exists(nltk_data_dir):
+    os.makedirs(nltk_data_dir)
+
+Pointe NLTK vers ce répertoire
+nltk.data.path.append(nltk_data_dir)
+
+Télécharge 'punkt' si ce n'est pas déjà fait
+try:
+    # Vérifie si 'punkt' est déjà dans le chemin NLTK
+    nltk.data.find('tokenizers/punkt')
+except LookupError: # LookupError est l'exception correcte pour les données NLTK manquantes
+    st.info("Téléchargement du package NLTK 'punkt' (première fois seulement)...")
+    nltk.download('punkt', download_dir=nltk_data_dir)
+    st.success("Package 'punkt' téléchargé.")
 
 st.set_page_config(page_title="Sentiment Scanner", layout="centered")
 
