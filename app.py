@@ -8,14 +8,14 @@ import os # Ajouté pour potentiellement lire les variables d'environnement si t
 Répertoire où NLTK va chercher/stocker ses données
 nltk_data_dir = os.path.join(os.path.abspath(os.path.dirname(file)), 'nltk_data')
 
-Si le répertoire n'existe pas, crée-le
+# Si le répertoire n'existe pas, crée-le
 if not os.path.exists(nltk_data_dir):
     os.makedirs(nltk_data_dir)
 
 Pointe NLTK vers ce répertoire
 nltk.data.path.append(nltk_data_dir)
 
-Télécharge 'punkt' si ce n'est pas déjà fait
+# Télécharge 'punkt' si ce n'est pas déjà fait
 try:
     # Vérifie si 'punkt' est déjà dans le chemin NLTK
     nltk.data.find('tokenizers/punkt')
