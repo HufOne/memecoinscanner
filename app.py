@@ -37,12 +37,15 @@ st.write("Analyse des tweets crypto pour déduire une position **LONG/SHORT**")
 
 # Si tu utilises st.secrets (recommandé pour Streamlit Cloud) :
 try:
-    BEARER_TOKEN = st.secrets["twitter_bearer_token"]
-    # Si tu as besoin de l'API v1.1 (moins courant avec la v2)
-    # API_KEY = st.secrets["twitter_api_key"]
-    # API_SECRET_KEY = st.secrets["twitter_api_secret_key"]
-    # ACCESS_TOKEN = st.secrets["twitter_access_token"]
-    # ACCESS_TOKEN_SECRET = st.secrets["twitter_access_token_secret"]
+  import os # Assure-toi que 'os' est bien importé en haut du fichier
+
+... (le reste de ton code)
+Accède au secret via les variables d'environnement de Codespaces
+BEARER_TOKEN = os.getenv("TWITTER_BEARER_TOKEN")
+
+if not BEARER_TOKEN:
+    st.error("La clé Bearer Token Twitter n'est pas configurée dans les secrets de Codespaces.")
+    st.stop()
 except KeyError:
     st.error("Les clés API Twitter ne sont pas configurées dans `secrets.toml` ou variables d'environnement.")
     st.stop() # Arrête l'exécution si les clés ne sont pas trouvées
