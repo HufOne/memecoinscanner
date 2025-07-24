@@ -1,30 +1,31 @@
-import streamlit as st
+import streamlit as st # S'assurer que streamlit est bien importé au début
 import tweepy
 from textblob import TextBlob
 import nltk
-import os # Ajouté pour potentiellement lire les variables d'environnement si tu ne passes pas par st.secrets
+import os # S'assurer que os est bien importé au début
 
-#--- Gestion du téléchargement NLTK ---
-# Répertoire où NLTK va chercher/stocker ses données
-nltk_data_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)) , 'nltk_data')
+# --- Gestion du téléchargement NLTK ---
+# Définit le répertoire où NLTK stockera les données
+nltk_data_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'nltk_data')
 
 # Si le répertoire n'existe pas, crée-le
 if not os.path.exists(nltk_data_dir):
     os.makedirs(nltk_data_dir)
 
-# Pointe NLTK vers ce répertoire
+# Ajoute ce répertoire au chemin de recherche de NLTK
 nltk.data.path.append(nltk_data_dir)
 
-# Télécharge 'punkt' si ce n'est pas déjà fait
+# Tente de trouver 'punkt'. S'il n'est pas trouvé, le télécharge.
 try:
-    # Vérifie si 'punkt' est déjà dans le chemin NLTK
     nltk.data.find('tokenizers/punkt')
-except LookupError: # LookupError est l'exception correcte pour les données NLTK manquantes
+except LookupError:
     st.info("Téléchargement du package NLTK 'punkt' (première fois seulement)...")
     nltk.download('punkt', download_dir=nltk_data_dir)
     st.success("Package 'punkt' téléchargé.")
 
 st.set_page_config(page_title="Sentiment Scanner", layout="centered")
+
+# ... (le reste de ton code, y compris la configuration de l'API Twitter) ...
 
 st.title("🧠 Sentiment Scanner")
 st.write("Analyse des tweets crypto pour déduire une position **LONG/SHORT**")
