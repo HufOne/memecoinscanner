@@ -12,7 +12,7 @@ nltk_data_dir = os.path.join(os.path.abspath(os.path.dirname(file)), 'nltk_data'
 if not os.path.exists(nltk_data_dir):
     os.makedirs(nltk_data_dir)
 
-Pointe NLTK vers ce répertoire
+# Pointe NLTK vers ce répertoire
 nltk.data.path.append(nltk_data_dir)
 
 # Télécharge 'punkt' si ce n'est pas déjà fait
