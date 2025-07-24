@@ -36,24 +36,35 @@ st.set_page_config(page_title="Sentiment Scanner", layout="centered")
 st.title("🧠 Sentiment Scanner")
 st.write("Analyse des tweets crypto pour déduire une position **LONG/SHORT**")
 
-# --- Configuration de l'API Twitter pour Codespaces ---
-# Récupère le Bearer Token depuis les variables d'environnement du Codespace
-# C'est la méthode recommandée pour les secrets dans Codespaces.
+# ... (le code précédent de NLTK, st.set_page_config, titres, etc.)
+
+st.set_page_config(page_title="Sentiment Scanner", layout="centered")
+
+st.title("🧠 Sentiment Scanner")
+st.write("Analyse des tweets crypto pour déduire une position **LONG/SHORT**")
+
+# --- Configuration de l'API Twitter ---
+# Récupère le Bearer Token depuis les variables d'environnement du Codespace (ou de Streamlit Cloud si déployé là)
 BEARER_TOKEN = os.getenv("TWITTER_BEARER_TOKEN")
 
-# Vérifie si la clé est présente. Si elle ne l'est pas, arrête l'application.
+# Vérifie si la clé est présente. Si elle ne l'est pas, arrête l'application avec un message d'erreur.
 if BEARER_TOKEN is None:
     st.error("ERREUR : La clé Bearer Token Twitter (TWITTER_BEARER_TOKEN) n'est pas configurée.")
     st.info("Veuillez la définir comme un secret dans les paramètres de votre Codespace GitHub.")
     st.stop() # Arrête l'exécution de l'application Streamlit
 
 # Initialise le client Tweepy avec le Bearer Token
+# Utilisez un bloc try-except ici pour capturer les erreurs d'initialisation de l'API.
 try:
     client = tweepy.Client(BEARER_TOKEN)
-    # Un petit test pour s'assurer que le client fonctionne (optionnel mais utile)
-    # client.get_me() 
+    # Optionnel : Faire une petite requête de test pour s'assurer que le client fonctionne
+    # try:
+    #     client.get_me() # Tente de récupérer les informations de l'utilisateur authentifié
+    # except Exception as e:
+    #     st.error(f"ERREUR : Le Bearer Token est configuré mais invalide. Détails : {e}")
+    #     st.stop()
 except Exception as e:
-    st.error(f"ERREUR : Impossible d'initialiser l'API Twitter. Vérifiez votre clé ou votre connexion.")
+    st.error(f"ERREUR : Impossible d'initialiser l'API Twitter (Tweepy Client).")
     st.error(f"Détails de l'erreur : {e}")
     st.stop() # Arrête l'application si le client ne peut pas être créé
 
