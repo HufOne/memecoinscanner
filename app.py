@@ -36,7 +36,6 @@ st.write("Analyse des tweets crypto pour déduire une position **LONG/SHORT**")
 # MAIS PENSE À LES RETIRER AVANT DE POUSSER SUR UN DÉPÔT PUBLIC !
 
 # Si tu utilises st.secrets (recommandé pour Streamlit Cloud) :
-try:
     BEARER_TOKEN = os.getenv("TWITTER_BEARER_TOKEN")
 
 if BEARER_TOKEN is None:
